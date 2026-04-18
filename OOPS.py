@@ -161,9 +161,104 @@ Include methods for inserting and searching for elements in the binary tree."""
 
 #-----------------------------------------------------------------------------------------
 
-"""Write a Python program to create a class representing a linked list data structure. 
+"""7.Write a Python program to create a class representing a linked list data structure. 
 Include methods for displaying linked list data, inserting and deleting nodes."""
 
 
 #--------------------------------------------------------------------------------
+
+"""8. Write a Python program to create a class representing a shopping cart. 
+Include methods for adding and removing items, and calculating the total price. """
+
+class ShoppingCart:
+    def __init__(self):
+        self.items = {}   # Dictionary to store items {item_name: price}
+
+    # Method to add item
+    def add_item(self, name, price):
+        self.items[name] = price
+        print(f"{name} added to cart.")
+
+    # Method to remove item
+    def remove_item(self, name):
+        if name in self.items:
+            del self.items[name]
+            print(f"{name} removed from cart.")
+        else:
+            print(f"{name} not found in cart.")
+
+    # Method to calculate total price
+    def calculate_total(self):
+        total = sum(self.items.values())
+        print(f"Total price: {total}")
+        return total
+
+    # Method to display cart items
+    def display_cart(self):
+        if not self.items:
+            print("Cart is empty.")
+        else:
+            print("Items in cart:")
+            for name, price in self.items.items():
+                print(f"{name}: {price}")
+
+
+
+"""9. Write a Python program to create a class representing a stack data structure.
+ Include methods for pushing, popping and displaying elements."""
+
+
+""""10. Write a Python program to create a class representing a queue data structure. Include methods for enqueueing and dequeueing elements.
+"""
+#--------------------------------------------------------------------------------------------------------------------------
+
+"""
+11. Write a Python program to create a class representing a bank. Include methods for managing customer accounts and transactions.
+	Create a Python class called BankAccount which represents a bank account, having as attributes: accountNumber (numeric type), name (name of the account owner as string type), balance.
+	Create a constructor with parameters: accountNumber, name, balance.
+	Create a Deposit() method which manages the deposit actions.
+	Create a Withdrawal() method which manages withdrawals actions.
+	Create an bankFees() method to apply the bank fees with a percentage of 5% of the balance account.
+	Create a display() method to display account details. Give the complete code for the BankAccount class."""
+
+
+class BankAccount:
+
+    # Constructor
+    def __init__(self, accountNumber, name, balance):
+        self.accountNumber = accountNumber
+        self.name = name
+        self.balance = balance
+
+    # Deposit Method
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"{amount} deposited successfully.")
+        else:
+            print("Invalid deposit amount.")
+
+    # Withdrawal Method
+    def withdrawal(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            print(f"{amount} withdrawn successfully.")
+        else:
+            print("Insufficient balance.")
+
+    # Bank Fees Method (5%)
+    def bankFees(self):
+        fee = self.balance * 0.05
+        self.balance -= fee
+        print(f"Bank fees of {fee} applied.")
+
+    # Display Method
+    def display(self):
+        print("\nAccount Details:")
+        print("Account Number:", self.accountNumber)
+        print("Account Holder Name:", self.name)
+        print("Balance:", self.balance)
+
+
+""""""
 
