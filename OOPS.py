@@ -258,7 +258,220 @@ class BankAccount:
         print("Account Number:", self.accountNumber)
         print("Account Holder Name:", self.name)
         print("Balance:", self.balance)
+#----------------------------------------------------------------------------------
+
+"""12. Build a flashcard using class in python. A flashcard is a card having information on both sides, which can be used as an aid in memoization. Flashcards usually have a question on one side and an answer on the other.
+
+	Example 1:
+
+	Approach:
+
+	Create a class named FlashCard.
+	Initialize dictionary fruits using init() method. Here you have to define fruit name as key and it's color as value. E.g., {"Banana": "yellow", "Strawberries": "pink"}
+	Now randomly choose a pair from fruits by using random module and store the key in variable fruit and value in variable color.
+	Now prompt the user to answer the color of the randomly chosen fruit.
+	If correct print correct else print wrong.
+	Output:
+
+	welcome to fruit quiz
+	What is the color of Strawberries
+	pink
+	Correct answer
+	Enter 0, if you want to play again: 0
+	What is the color of watermelon
+	green
+	Correct answer
+	Enter 0, if you want to play again: 1"""
+
+import random
 
 
-""""""
+class FlashCard:
+
+    def __init__(self):
+        self.fruits = {
+            "Banana": "yellow",
+            "Strawberries": "pink",
+            "Watermelon": "green",
+            "Apple": "red",
+            "Orange": "orange"
+        }
+
+    def play(self):
+        print("welcome to fruit quiz")
+
+        while True:
+            fruit, color = random.choice(list(self.fruits.items()))
+
+            answer = input(f"What is the color of {fruit} : ")
+
+            if answer.lower() == color.lower():
+                print("Correct answer")
+            else:
+                print("Wrong answer")
+                print("Correct color is", color)
+
+            choice = input("Enter 0, if you want to play again: ")
+
+            if choice != "0":
+                break
+
+
+obj = FlashCard()
+obj.play()
+
+#--------------------------------------------------------------------
+
+"""13. TechWorld, a technology training center, wants to allocate courses for instructors. An instructor is identified by name, technology skills, experience and average feedback. An instructor is allocated a course, if he/she satisfies the below two conditions:
+
+	eligibility criteria:
+	if experience is more than 3 years, average feedback should be 4.5 or more
+	if experience is 3 years or less, average feedback should be 4 or more
+	he/she should posses the technology skill for the course
+	Identify the class name and attributes to represent instructors. Write a Python program to implement the class chosen with its attributes and methods.
+
+	Note:
+
+	Consider all instance variables to be private and methods to be public.
+	An instructor may have multiple technology skills, so consider instance variable, technology_skill to be a list.
+	check_eligibility(): Return true if eligibility criteria is satisfied by the instructor. Else, return false
+	allocate_course(technology): Return true if the course which requires the given technology can be allocated to the instructor. Else, return false.
+	Represent a few objects of the class, initialize instance variables using setter methods, invoke appropriate methods and test your program."""
+
+class Instructor:
+
+    def __init__(self):
+        self.__name = None
+        self.__technology_skill = []
+        self.__experience = 0
+        self.__average_feedback = 0
+
+    # Setter methods
+    def set_name(self, name):
+        self.__name = name
+
+    def set_technology_skill(self, technology_skill):
+        self.__technology_skill = technology_skill
+
+    def set_experience(self, experience):
+        self.__experience = experience
+
+    def set_average_feedback(self, average_feedback):
+        self.__average_feedback = average_feedback
+
+    # Getter methods
+    def get_name(self):
+        return self.__name
+
+    def get_technology_skill(self):
+        return self.__technology_skill
+
+    def get_experience(self):
+        return self.__experience
+
+    def get_average_feedback(self):
+        return self.__average_feedback
+
+    # Method to check eligibility
+    def check_eligibility(self):
+
+        if self.__experience > 3 and self.__average_feedback >= 4.5:
+            return True
+
+        elif self.__experience <= 3 and self.__average_feedback >= 4:
+            return True
+
+        else:
+            return False
+
+    # Method to allocate course
+    def allocate_course(self, technology):
+
+        if self.check_eligibility() and technology in self.__technology_skill:
+            return True
+
+        else:
+            return False
+
+
+# Object 1
+i1 = Instructor()
+
+i1.set_name("Sai")
+i1.set_technology_skill(["Python", "Java", "SQL"])
+i1.set_experience(5)
+i1.set_average_feedback(4.7)
+
+print("Instructor Name:", i1.get_name())
+
+if i1.allocate_course("Python"):
+    print("Course Allocated")
+else:
+    print("Course Not Allocated")
+
+
+print()
+
+
+# Object 2
+i2 = Instructor()
+
+i2.set_name("Rahul")
+i2.set_technology_skill(["C", "C++"])
+i2.set_experience(2)
+i2.set_average_feedback(3.8)
+
+print("Instructor Name:", i2.get_name())
+
+if i2.allocate_course("Python"):
+    print("Course Allocated")
+else:
+    print("Course Not Allocated")
+
+
+"""
+14. Write a program that uses datetime module within a class. Enter manufacturing date and expiry date of the product.
+ The program must display the years, months and days that are left for expiry."""
+
+from datetime import datetime
+
+class Product:
+
+    def __init__(self, mfg_date, exp_date):
+
+        self.mfg_date = datetime.strptime(mfg_date, "%d-%m-%Y")
+        self.exp_date = datetime.strptime(exp_date, "%d-%m-%Y")
+
+    def expiry_details(self):
+
+        today = datetime.today()
+
+        if self.exp_date < today:
+            print("Product is already expired")
+
+        else:
+            diff = self.exp_date - today
+
+            days_left = diff.days
+
+            years = days_left // 365
+            months = (days_left % 365) // 30
+            days = (days_left % 365) % 30
+
+            print("Manufacturing Date :", self.mfg_date.strftime("%d-%m-%Y"))
+            print("Expiry Date        :", self.exp_date.strftime("%d-%m-%Y"))
+            print("Time left for expiry:")
+            print(years, "Years", months, "Months", days, "Days")
+
+
+# Input
+mfg = input("Enter Manufacturing Date (dd-mm-yyyy): ")
+exp = input("Enter Expiry Date (dd-mm-yyyy): ")
+
+# Object creation
+p1 = Product(mfg, exp)
+
+# Method call
+p1.expiry_details()
+
 
